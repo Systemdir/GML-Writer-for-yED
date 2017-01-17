@@ -26,7 +26,7 @@ To use the gml writer ensure that your project has following dependencies:
             <artifactId>jgrapht-ext</artifactId>
             <version>0.9.1</version>
         </dependency>
-    </dependencies>
+</dependencies>
 ```
 and includes the either [GMLWriterForYed-1.0.0.jar](https://hayato-hess.de/files/GmlWriter/GMLWriterForYed-1.0.0.jar).
 
