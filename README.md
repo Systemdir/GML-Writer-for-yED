@@ -38,4 +38,4 @@ After exporting the graph to a .gml file, import it in [yED](https://www.yworks.
 
 ## Pictures ##
 ![yed2](http://hayato-hess.de/pictures/yED/YED2.jpg)
-![yed](http://hayato-hess.de/pictures/yED/YED1.jpg)
+![yed](http://hayato-hess.de/pictures/yED/YED1cpy.jpg)
