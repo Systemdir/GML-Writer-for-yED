@@ -9,7 +9,7 @@ Please note that the GML-Writer-for-yED is distributed WITHOUT ANY WARRANTY; wit
 * Written by [Hayato Hess](mailto:hayato.hess@gmail.com) and Contributors
 
 ## Getting Started ##
-The package `de.hess.examples` in the `Example` directory includes two small demo applications to help you get started. The page [https://hayato-hess.de/GMLwriter](https://hayato-hess.de/GMLwriter) offers some pictures of graphs created with the gml writer.
+The package `de.hess.examples` in the `Example` directory contains two small demo applications to help you get started. 
 
 To use the gml writer ensure that your project has following dependencies:
 ```
