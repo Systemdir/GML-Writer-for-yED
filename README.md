@@ -30,6 +30,9 @@ To use the gml writer ensure that your project has following dependencies:
 ```
 and includes the either [GMLWriterForYed-1.0.0.jar](https://hayato-hess.de/files/GmlWriter/GMLWriterForYed-1.0.0.jar).
 
+### How to import in yED ### 
+After exporting the graph to a .gml file, import it in [yED](https://www.yworks.com/products/yed) by using the open dialog. After importing, the graph will most likely look broken as every node is placed on top of each other. To resolve this, go to the `Layout` menu in yED and select one fitting layout. Further, the `Fit Node to Label` in the `Tools` menu is useful when the labels are longer than the node's widths.
+
 ## Download Ressources ##
 [Binaries](https://hayato-hess.de/files/GmlWriter/GMLWriterForYed-1.0.0.jar)
 
