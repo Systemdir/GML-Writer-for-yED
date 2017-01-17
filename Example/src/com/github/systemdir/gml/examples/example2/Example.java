@@ -1,6 +1,6 @@
-package de.hess.examples.example2;
+package com.github.systemdir.gml.examples.example2;
 
-import de.hess.examples.example2.model.*;
+import com.github.systemdir.gml.examples.example2.model.*;
 import de.hess.yed.YedGmlWriter;
 import org.jgrapht.graph.SimpleGraph;
 

@@ -1,4 +1,4 @@
-package de.hess.examples.example1;
+package com.github.systemdir.gml.examples.example1;
 
 import de.hess.yed.model.EdgeGraphicDefinition;
 import de.hess.yed.model.GraphicDefinition;

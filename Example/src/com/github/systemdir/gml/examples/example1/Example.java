@@ -1,4 +1,4 @@
-package de.hess.examples.example1;
+package com.github.systemdir.gml.examples.example1;
 
 import de.hess.yed.YedGmlWriter;
 import org.jgrapht.graph.DefaultEdge;
@@ -6,8 +6,6 @@ import org.jgrapht.graph.SimpleGraph;
 
 import java.io.*;
 import java.util.Scanner;
-
-import static de.hess.yed.YedGmlWriter.PRINT_NO_LABELS;
 
 /**
  * The first example allows to export a very simple graph entered by the user

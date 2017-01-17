@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.hhess.yed</groupId>
+    <groupId>com.github.systemdir.gml</groupId>
     <artifactId>GMLWriterForYed</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
@@ -26,6 +26,12 @@
             <email>Hayato.Hess@gmail.com</email>
         </developer>
     </developers>
+
+    <scm>
+        <connection>scm:git:git@github.com:Systemdir/GML-Writer-for-yED.git</connection>
+        <developerConnection>scm:git:git@github.com:Systemdir/GML-Writer-for-yED.git</developerConnection>
+        <url>git@github.com:Systemdir/GML-Writer-for-yED.git</url>
+    </scm>
     
     <!-- Default build settings / plugins -->
     <build>

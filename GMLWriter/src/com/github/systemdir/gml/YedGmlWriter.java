@@ -33,11 +33,11 @@
  * 15-Dec-2006 : Initial Version (DM);
  *
  */
-package de.hess.yed;
+package com.github.systemdir.gml;
 
-import de.hess.yed.model.EdgeGraphicDefinition;
-import de.hess.yed.model.NodeGraphicDefinition;
-import de.hess.yed.model.YedGmlGraphicsProvider;
+import com.github.systemdir.gml.model.EdgeGraphicDefinition;
+import com.github.systemdir.gml.model.NodeGraphicDefinition;
+import com.github.systemdir.gml.model.YedGmlGraphicsProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jgrapht.DirectedGraph;
@@ -52,9 +52,9 @@ import java.io.PrintWriter;
 import java.io.Writer;
 import java.util.*;
 
-import static de.hess.yed.YedGmlWriter.PrintLabels.PRINT_EDGE_LABELS;
-import static de.hess.yed.YedGmlWriter.PrintLabels.PRINT_GROUP_LABELS;
-import static de.hess.yed.YedGmlWriter.PrintLabels.PRINT_VERTEX_LABELS;
+import static com.github.systemdir.gml.YedGmlWriter.PrintLabels.PRINT_EDGE_LABELS;
+import static com.github.systemdir.gml.YedGmlWriter.PrintLabels.PRINT_GROUP_LABELS;
+import static com.github.systemdir.gml.YedGmlWriter.PrintLabels.PRINT_VERTEX_LABELS;
 
 
 /**

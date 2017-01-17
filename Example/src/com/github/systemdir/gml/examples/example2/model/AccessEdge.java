@@ -1,7 +1,5 @@
-package de.hess.examples.example2.model;
+package com.github.systemdir.gml.examples.example2.model;
 
-import de.hess.examples.example2.model.AccessType;
-import org.jetbrains.annotations.Nullable;
 import org.jgrapht.graph.DefaultEdge;
 
 /**
