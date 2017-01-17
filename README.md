@@ -5,7 +5,9 @@ Extends the gml export of JGraphT to better supports the import to yED.
 Please note that the GML-Writer-for-yED is distributed WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 Released: January 17, 2017
+
 Based on: JgraphT (and yED)
+
 Written by [Hayato Hess](mailto:hayato.hess@gmail.com) and Contributors
 
 ## Getting Started ##
@@ -26,9 +28,11 @@ To use the gml writer ensure that your project has following dependencies:
         </dependency>
     </dependencies>
 ```
-and includes the either GMLWriterForYed-1.0.0.jar or has the dependencies to the sources set (as done in the example).
+and includes the either [GMLWriterForYed-1.0.0.jar](https://hayato-hess.de/files/GmlWriter/GMLWriterForYed-1.0.0.jar).
 
 ## Download Ressources ##
 [Binaries](https://hayato-hess.de/files/GmlWriter/GMLWriterForYed-1.0.0.jar)
+
 [Source](https://hayato-hess.de/files/GmlWriter/GMLWriterForYed-1.0.0-sources.jar)
+
 [Documentation](https://hayato-hess.de/files/GmlWriter/GMLWriterForYed-1.0.0-javadoc.jar)
