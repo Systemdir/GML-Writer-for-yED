@@ -22,12 +22,12 @@ To use the gml writer, ensure that your project has following maven dependencies
         <dependency>
             <groupId>org.jgrapht</groupId>
             <artifactId>jgrapht-core</artifactId>
-            <version>0.9.1</version>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>org.jgrapht</groupId>
             <artifactId>jgrapht-ext</artifactId>
-            <version>0.9.1</version>
+            <version>1.0.0</version>
         </dependency>
 </dependencies>
 ```
