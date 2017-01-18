@@ -11,9 +11,14 @@ Please note that the GML-Writer-for-yED is distributed WITHOUT ANY WARRANTY; wit
 ## Getting Started ##
 The package `com.github.systemdir.gml.examples` in the `Example` directory contains two small demo applications to help you get started. 
 
-To use the gml writer ensure that your project has following dependencies:
+To use the gml writer, ensure that your project has following maven dependencies:
 ```
 <dependencies>
+        <dependency>
+            <groupId>com.github.systemdir.gml</groupId>
+            <artifactId>GMLWriterForYed</artifactId>
+            <version>1.0.0</version>
+        </dependency>
         <dependency>
             <groupId>org.jgrapht</groupId>
             <artifactId>jgrapht-core</artifactId>
@@ -26,15 +31,14 @@ To use the gml writer ensure that your project has following dependencies:
         </dependency>
 </dependencies>
 ```
-and includes the either [GMLWriterForYed-1.0.0.jar](https://hayato-hess.de/files/GmlWriter/GMLWriterForYed-1.0.0.jar).
 
 ### How to import to yED 
 After exporting the graph to a .gml file, import it in [yED](https://www.yworks.com/products/yed) by using the open dialog. After importing, the graph will most likely look broken as every node is placed on top of each other. To resolve this, go to the `Layout` menu in yED and select one fitting layout. Further, the `Fit Node to Label` in the `Tools` menu is useful when the labels are longer than the node's widths.
 
-## Download Ressources ##
-* [Binaries](https://hayato-hess.de/files/GmlWriter/GMLWriterForYed-1.0.0.jar)
-* [Source](https://hayato-hess.de/files/GmlWriter/GMLWriterForYed-1.0.0-sources.jar)
-* [Documentation](https://hayato-hess.de/files/GmlWriter/GMLWriterForYed-1.0.0-javadoc.jar)
+## Manually Download Ressources ##
+* [Binaries (1.0)](https://hayato-hess.de/files/GmlWriter/GMLWriterForYed-1.0.0.jar)
+* [Source (1.0)](https://hayato-hess.de/files/GmlWriter/GMLWriterForYed-1.0.0-sources.jar)
+* [Documentation (1.0)](https://hayato-hess.de/files/GmlWriter/GMLWriterForYed-1.0.0-javadoc.jar)
 
 ## Pictures ##
 ![yed2](http://hayato-hess.de/pictures/yED/YED2.jpg)

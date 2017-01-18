@@ -1,6 +1,6 @@
 package com.github.systemdir.gml.examples.example1;
 
-import de.hess.yed.YedGmlWriter;
+import com.github.systemdir.gml.YedGmlWriter;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 
@@ -20,7 +20,7 @@ public class Example {
 
         // get the gml writer
         YedGmlWriter<String, DefaultEdge, Object> writer
-                = new YedGmlWriter.Builder<>(graphicsProvider, YedGmlWriter.PrintLabels.PRINT_VERTEX_LABELS).build();
+                = new YedGmlWriter.Builder<String, DefaultEdge, Object>(graphicsProvider, YedGmlWriter.PrintLabels.PRINT_VERTEX_LABELS).build();
 
         
         // write to file

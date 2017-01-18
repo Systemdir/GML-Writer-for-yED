@@ -28,7 +28,7 @@
     <!-- Dependencies -->
     <dependencies>
         <dependency>
-            <groupId>de.hhess.yed</groupId>
+            <groupId>com.github.systemdir.gml</groupId>
             <artifactId>GMLWriterForYed</artifactId>
             <version>1.0.0</version>
         </dependency>

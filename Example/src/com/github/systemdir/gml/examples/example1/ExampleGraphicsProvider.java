@@ -1,9 +1,9 @@
 package com.github.systemdir.gml.examples.example1;
 
-import de.hess.yed.model.EdgeGraphicDefinition;
-import de.hess.yed.model.GraphicDefinition;
-import de.hess.yed.model.NodeGraphicDefinition;
-import de.hess.yed.model.YedGmlGraphicsProvider;
+import com.github.systemdir.gml.model.EdgeGraphicDefinition;
+import com.github.systemdir.gml.model.GraphicDefinition;
+import com.github.systemdir.gml.model.NodeGraphicDefinition;
+import com.github.systemdir.gml.model.YedGmlGraphicsProvider;
 import org.jetbrains.annotations.Nullable;
 import org.jgrapht.graph.DefaultEdge;
 
@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * Defines the look and feel of the graph in the first example
  */
-public class ExampleGraphicsProvider implements YedGmlGraphicsProvider<String, DefaultEdge, Object>{
+public class ExampleGraphicsProvider implements YedGmlGraphicsProvider<String, DefaultEdge, Object> {
 
     @Override
     public NodeGraphicDefinition getVertexGraphics(String vertex) {
