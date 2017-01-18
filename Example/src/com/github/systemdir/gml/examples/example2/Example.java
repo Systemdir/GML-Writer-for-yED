@@ -1,13 +1,14 @@
 package com.github.systemdir.gml.examples.example2;
 
+import com.github.systemdir.gml.YedGmlWriter;
 import com.github.systemdir.gml.examples.example2.model.*;
-import de.hess.yed.YedGmlWriter;
 import org.jgrapht.graph.SimpleGraph;
 
 import java.io.*;
 import java.util.*;
 
-import static de.hess.yed.YedGmlWriter.PRINT_LABELS;
+import static com.github.systemdir.gml.YedGmlWriter.PRINT_LABELS;
+
 
 /**
  * Defines a simple graph with a data vertex and four method vertexes which are grouped together
@@ -38,11 +39,12 @@ public class Example {
 
         // create groups
         MethodGroup group = new MethodGroup("My Method Group");
-        //note that group elements must also be added if you want to draw edges between groups
-        //graph.addVertex(group);
         Map<MethodGroup, Set<Element>> groups = new HashMap<>();
         groups.put(group, methods);
 
+        //note that group elements must also be added if you want to draw edges between groups
+        //graph.addVertex(group);
+        
         
         // define the look and feel of the graph
         ExampleGraphicsProvider graphicsProvider = new ExampleGraphicsProvider();

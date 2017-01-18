@@ -1,10 +1,10 @@
 package com.github.systemdir.gml.examples.example2;
 
 import com.github.systemdir.gml.examples.example2.model.*;
-import de.hess.yed.model.EdgeGraphicDefinition;
-import de.hess.yed.model.GraphicDefinition;
-import de.hess.yed.model.NodeGraphicDefinition;
-import de.hess.yed.model.YedGmlGraphicsProvider;
+import com.github.systemdir.gml.model.EdgeGraphicDefinition;
+import com.github.systemdir.gml.model.GraphicDefinition;
+import com.github.systemdir.gml.model.NodeGraphicDefinition;
+import com.github.systemdir.gml.model.YedGmlGraphicsProvider;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
