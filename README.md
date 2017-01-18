@@ -9,7 +9,7 @@ Please note that the GML-Writer-for-yED is distributed WITHOUT ANY WARRANTY; wit
 * Written by [Hayato Hess](mailto:hayato.hess@gmail.com) and Contributors
 
 ## Getting Started ##
-The package `com.github.systemdir.gml.examples` in the `Example` directory contains two small demo applications to help you get started. 
+The package `com.github.systemdir.gml.examples` in the [Example](https://github.com/Systemdir/GML-Writer-for-yED/tree/master/Example/src/com/github/systemdir/gml/examples) directory contains two small demo applications to help you get started. 
 
 To use the gml writer, ensure that your project has following maven dependencies:
 ```
