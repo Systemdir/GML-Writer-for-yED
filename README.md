@@ -2,8 +2,6 @@
 # GML-Writer-for-yED
 Extends the [Graph Modeling Language (GML)](https://en.wikipedia.org/wiki/Graph_Modelling_Language) export of JGraphT to better supports the import to yED.
 
-Please note that the GML-Writer-for-yED is distributed WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
 * Released: January 17, 2017
 * Based on: JgraphT (and yED)
 * Written by [Hayato Hess](mailto:hayato.hess@gmail.com) and Contributors
