@@ -37,24 +37,25 @@ package com.github.systemdir.gml;
 
 import com.github.systemdir.gml.model.EdgeGraphicDefinition;
 import com.github.systemdir.gml.model.NodeGraphicDefinition;
+import com.github.systemdir.gml.model.UniqueIntIdFunction;
 import com.github.systemdir.gml.model.YedGmlGraphicsProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jgrapht.DirectedGraph;
 import org.jgrapht.Graph;
 import org.jgrapht.UndirectedGraph;
-import org.jgrapht.ext.EdgeNameProvider;
-import org.jgrapht.ext.IntegerEdgeNameProvider;
-import org.jgrapht.ext.IntegerNameProvider;
-import org.jgrapht.ext.VertexNameProvider;
 
 import java.io.PrintWriter;
 import java.io.Writer;
-import java.util.*;
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.function.Function;
 
-import static com.github.systemdir.gml.YedGmlWriter.PrintLabels.PRINT_EDGE_LABELS;
-import static com.github.systemdir.gml.YedGmlWriter.PrintLabels.PRINT_GROUP_LABELS;
-import static com.github.systemdir.gml.YedGmlWriter.PrintLabels.PRINT_VERTEX_LABELS;
+import static com.github.systemdir.gml.YedGmlWriter.PrintLabels.*;
 
 
 /**
@@ -71,12 +72,12 @@ import static com.github.systemdir.gml.YedGmlWriter.PrintLabels.PRINT_VERTEX_LAB
 public class YedGmlWriter<V, E, G> {
 
     public static class Builder<V1, E1, G1> {
-        VertexNameProvider<G1> groupLabelProvider;
+        Function<G1, String> groupLabelProvider;
         Map<G1, ? extends Set<V1>> groupMapping;
-        VertexNameProvider vertexIDProvider;
-        VertexNameProvider<V1> vertexLabelProvider;
-        EdgeNameProvider<E1> edgeIDProvider;
-        EdgeNameProvider<E1> edgeLabelProvider;
+        Function<Object, String> vertexIDProvider;
+        Function<V1, String> vertexLabelProvider;
+        Function<E1, String> edgeIDProvider;
+        Function<E1, String> edgeLabelProvider;
         YedGmlGraphicsProvider<V1, E1, G1> graphicsProvider;
 
         EnumSet<PrintLabels> printLabels;
@@ -92,62 +93,74 @@ public class YedGmlWriter<V, E, G> {
         /**
          * Group nodes together
          *
-         * @param groupMapping
-         * @param groupLabelProvider
+         * @param groupMapping Maps groups to the vertices they belong to. Map must not contain null values.
+         * @param groupLabelProvider Optional label function for the group. When null, toString() is used for generating group labels.
          */
-        public Builder<V1, E1, G1> setGroups(Map<G1, ? extends Set<V1>> groupMapping, VertexNameProvider<G1> groupLabelProvider) {
+        public Builder<V1, E1, G1> setGroups(Map<G1, ? extends Set<V1>> groupMapping, Function<G1, String> groupLabelProvider) {
             this.groupMapping = groupMapping;
             this.groupLabelProvider = groupLabelProvider;
             return this;
         }
 
         /**
-         * Sets a id provider for the vertexes. This will default to {@link org.jgrapht.ext.IntegerNameProvider} if not set.
+         * Sets a id provider for the vertexes.
+         * <p>
+         * This will default to {@link com.github.systemdir.gml.model.UniqueIntIdFunction} if not set.
          *
-         * @param vertexIDProvider id provider for the vertexes to use.
+         * @param vertexIDProvider The function must not return null
+         * @return this
          */
-        public Builder<V1, E1, G1> setVertexIDProvider(VertexNameProvider vertexIDProvider) {
+        public Builder<V1, E1, G1> setVertexIDProvider(Function<Object, String> vertexIDProvider) {
             this.vertexIDProvider = vertexIDProvider;
             return this;
         }
 
         /**
-         * For generating vertex labels. If null, vertex labels will be generated using the toString() method of the vertex object.
+         * For generating vertex labels.
+         * <p>
+         * If null, vertex labels will be generated using the toString() method of the vertex object.
          *
-         * @param vertexLabelProvider
+         * @param vertexLabelProvider The function must not return null
+         * @return this
          */
-        public Builder<V1, E1, G1> setVertexLabelProvider(VertexNameProvider<V1> vertexLabelProvider) {
+        public Builder<V1, E1, G1> setVertexLabelProvider(Function<V1, String> vertexLabelProvider) {
             this.vertexLabelProvider = vertexLabelProvider;
             return this;
         }
 
         /**
-         * Sets a id provider for the vertexes. This will default to {@link org.jgrapht.ext.IntegerEdgeNameProvider} if not set.
+         * Sets a id provider for the vertexes.
+         * <p>
+         * This will default to {@link com.github.systemdir.gml.model.UniqueIntIdFunction} if not set.
          *
-         * @param edgeIDProvider id provider for the vertexes to use.
+         * @param edgeIDProvider The function must not return null
+         * @return this
          */
-        public Builder<V1, E1, G1> setEdgeIDProvider(EdgeNameProvider<E1> edgeIDProvider) {
+        public Builder<V1, E1, G1> setEdgeIDProvider(Function<E1, String> edgeIDProvider) {
             this.edgeIDProvider = edgeIDProvider;
             return this;
         }
 
         /**
-         * For generating edge labels. If null, edge labels will be generated using the toString() method of the edge object.
+         * For generating edge labels.
+         * <p>
+         * If null, edge labels will be generated using the toString() method of the edge object.
          *
-         * @param edgeLabelProvider
+         * @param edgeLabelProvider The function must not return null
+         * @return this
          */
-        public Builder<V1, E1, G1> setEdgeLabelProvider(EdgeNameProvider<E1> edgeLabelProvider) {
+        public Builder<V1, E1, G1> setEdgeLabelProvider(Function<E1, String> edgeLabelProvider) {
             this.edgeLabelProvider = edgeLabelProvider;
             return this;
         }
 
         public YedGmlWriter<V1, E1, G1> build() {
-            return new YedGmlWriter<V1, E1, G1>(this);
+            return new YedGmlWriter<>(this);
         }
     }
 
 
-    private static final String creator = "JGraphT GML Exporter - modified by Hayato Hess";
+    private static final String creator = "JGraphT GML Exporter - modified by Hayato Hess - modified by Andreas Hofstadler";
     private static final String version = "1";
 
     public static final String delim = " ";
@@ -166,22 +179,26 @@ public class YedGmlWriter<V, E, G> {
     public static final PrintLabels[] PRINT_NO_LABELS = new PrintLabels[0];
 
     @Nullable
-    private Map<G, ? extends Set<V>> groupMapping;
+    private final Map<G, ? extends Set<V>> groupMapping;
     // intern - created by constructor from groupMapping
-    private Map<V, G> reversedGroupMapping;
+    @Nullable
+    private final Map<V, G> reversedGroupMapping;
 
     @NotNull
-    private VertexNameProvider vertexIDProvider;
-    @Nullable
-    private VertexNameProvider<V> vertexLabelProvider;
+    private final Function<Object, String> vertexIDProvider;
     @NotNull
-    private EdgeNameProvider<E> edgeIDProvider;
-    @Nullable
-    private EdgeNameProvider<E> edgeLabelProvider;
+    private final Function<V, String> vertexLabelProvider;
     @NotNull
-    private YedGmlGraphicsProvider<V, E, G> graphProvider;
-    @Nullable
-    private VertexNameProvider<G> groupLableProvider;
+    private final Function<? super E, String> edgeIDProvider;
+    @NotNull
+    private final Function<E, String> edgeLabelProvider;
+    @NotNull
+    private final YedGmlGraphicsProvider<V, E, G> graphProvider;
+    @NotNull
+    private final Function<G, String> groupLabelProvider;
+    @NotNull
+    private final Function<? super G, String> groupIdProvider;
+
     @NotNull
     private final EnumSet<PrintLabels> printLables;
 
@@ -189,36 +206,70 @@ public class YedGmlWriter<V, E, G> {
         this.graphProvider = builder.graphicsProvider;
         this.printLables = builder.printLabels;
 
-        this.groupLableProvider = builder.groupLabelProvider;
         this.groupMapping = builder.groupMapping;
 
-        this.vertexLabelProvider = builder.vertexLabelProvider;
-        this.edgeLabelProvider = builder.edgeLabelProvider;
+        this.vertexLabelProvider = builder.vertexLabelProvider != null
+                ? builder.vertexLabelProvider
+                : Objects::toString;
+        this.edgeLabelProvider = builder.edgeLabelProvider != null
+                ? builder.edgeLabelProvider
+                : Objects::toString;
+
+        /*
+         * The same id function is used for all objects. Simplest way to prevent
+         * any duplicate ID problems.
+         */
+        UniqueIntIdFunction<Object> uniqueIdFunction = new UniqueIntIdFunction<>();
 
         if (builder.vertexIDProvider != null) {
             this.vertexIDProvider = builder.vertexIDProvider;
         } else {
-            this.vertexIDProvider = new IntegerNameProvider<>();
+
+            this.vertexIDProvider = uniqueIdFunction;
         }
 
         if (builder.edgeIDProvider != null) {
             this.edgeIDProvider = builder.edgeIDProvider;
         } else {
-            this.edgeIDProvider = new IntegerEdgeNameProvider<E>();
+            this.edgeIDProvider = uniqueIdFunction;
         }
 
         if (groupMapping != null) {
             reversedGroupMapping = new HashMap<>();
-            for (G group : groupMapping.keySet()) {
-                for (V value : groupMapping.get(group)) {
-                    reversedGroupMapping.put(value, group);
+            for (Map.Entry<G, ? extends Set<V>> group : groupMapping.entrySet()) {
+                for (V grouped : group.getValue()) {
+                    reversedGroupMapping.put(grouped, group.getKey());
                 }
             }
+            this.groupLabelProvider = builder.groupLabelProvider != null
+                    ? builder.groupLabelProvider
+                    : Objects::toString;
+            groupIdProvider = uniqueIdFunction;
+        } else {
+            reversedGroupMapping = null;
+            groupIdProvider = uniqueIdFunction;
+            groupLabelProvider = Objects::toString;
         }
     }
 
     private String quoted(final String s) {
-        return "\"" + s + "\"";
+        StringBuilder sb = new StringBuilder(s.length() + 2);
+        sb.append('"');
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            switch (ch) {
+                case '"':
+                    sb.append("&quot;");
+                    break;
+                case '&':
+                    sb.append("&amp;");
+                default:
+                    sb.append(ch);
+            }
+        }
+        sb.append('"');
+
+        return sb.toString();
     }
 
     private void exportHeader(PrintWriter out) {
@@ -238,23 +289,21 @@ public class YedGmlWriter<V, E, G> {
             out.println(tab1 + "node");
             out.println(tab1 + "[");
             out.println(
-                    tab2 + "id" + delim + vertexIDProvider.getVertexName(vertex));
-            
-            boolean printVertexLabels=printLables.contains(PRINT_VERTEX_LABELS);
+                    tab2 + "id" + delim + vertexIDProvider.apply(vertex));
+
+            boolean printVertexLabels = printLables.contains(PRINT_VERTEX_LABELS);
             if (printVertexLabels) {
-                String label =
-                        (vertexLabelProvider == null) ? vertex.toString()
-                                : vertexLabelProvider.getVertexName(vertex);
+                String label = vertexLabelProvider.apply(vertex);
                 out.println(tab2 + "label" + delim + quoted(label));
             }
-            
+
             NodeGraphicDefinition definition = graphProvider.getVertexGraphics(vertex);
             if (definition != null)
                 out.print(definition.toString(printVertexLabels));
-            
-            if (groupMapping != null) {
+
+            if (reversedGroupMapping != null) {
                 if (reversedGroupMapping.containsKey(vertex)) {
-                    out.println(tab2 + "gid" + delim + vertexIDProvider.getVertexName(reversedGroupMapping.get(vertex)));
+                    out.println(tab2 + "gid" + delim + groupIdProvider.apply(reversedGroupMapping.get(vertex)));
                 }
             }
 
@@ -266,21 +315,20 @@ public class YedGmlWriter<V, E, G> {
         if (groupMapping == null)
             return;
 
-        for (G group : groupMapping.keySet()) {
+        for (Map.Entry<G, ? extends Set<V>> groupEntry : groupMapping.entrySet()) {
+            G group = groupEntry.getKey();
             out.println(tab1 + "node");
             out.println(tab1 + "[");
             out.println(
-                    tab2 + "id" + delim + vertexIDProvider.getVertexName(group));
+                    tab2 + "id" + delim + groupIdProvider.apply(group));
 
             boolean printGroupLabels = printLables.contains(PRINT_GROUP_LABELS);
             if (printGroupLabels) {
-                String label =
-                        (groupLableProvider == null) ? group.toString()
-                                : groupLableProvider.getVertexName(group);
+                String label = groupLabelProvider.apply(group);
                 out.println(tab2 + "label" + delim + quoted(label));
             }
 
-            NodeGraphicDefinition definition = graphProvider.getGroupGraphics(group, groupMapping.get(group));
+            NodeGraphicDefinition definition = graphProvider.getGroupGraphics(group, groupEntry.getValue());
             if (definition != null)
                 out.print(definition.toString(printGroupLabels));
 
@@ -294,20 +342,18 @@ public class YedGmlWriter<V, E, G> {
         for (E edge : g.edgeSet()) {
             out.println(tab1 + "edge");
             out.println(tab1 + "[");
-            String id = edgeIDProvider.getEdgeName(edge);
+            String id = edgeIDProvider.apply(edge);
             out.println(tab2 + "id" + delim + id);
-            String s = vertexIDProvider.getVertexName(g.getEdgeSource(edge));
+            String s = vertexIDProvider.apply(g.getEdgeSource(edge));
             out.println(tab2 + "source" + delim + s);
-            String t = vertexIDProvider.getVertexName(g.getEdgeTarget(edge));
+            String t = vertexIDProvider.apply(g.getEdgeTarget(edge));
             out.println(tab2 + "target" + delim + t);
 
 
             boolean printEdgeLabels = printLables.contains(PRINT_EDGE_LABELS);
 
             if (printEdgeLabels) {
-                String label =
-                        (edgeLabelProvider == null) ? edge.toString()
-                                : edgeLabelProvider.getEdgeName(edge);
+                String label = edgeLabelProvider.apply(edge);
                 out.println(tab2 + "label" + delim + quoted(label));
             }
 
@@ -319,36 +365,34 @@ public class YedGmlWriter<V, E, G> {
             out.println(tab1 + "]");
         }
     }
-    
+
     private void export(Writer output, Graph<V, E> g, boolean directed) {
         PrintWriter out = new PrintWriter(output);
 
-        for (V from : g.vertexSet()) {
-            // assign ids in vertex set iteration order
-            // the id provider hereby stores already "seen" objects
-            vertexIDProvider.getVertexName(from);
-        }
+        // assign ids in vertex set iteration order
+        // the id provider hereby stores already "seen" objects
+        g.vertexSet().forEach(vertexIDProvider::apply);
 
         // print gml header
         exportHeader(out);
         out.println("graph");
         out.println("[");
-        
+
         // print (empty graph label)
         out.println(tab1 + "label" + delim + quoted(""));
-        
+
         // print gml is directed graph?
         if (directed) {
             out.println(tab1 + "directed" + delim + "1");
         } else {
             out.println(tab1 + "directed" + delim + "0");
         }
-        
+
         // export graph elements
         exportVertices(out, g);
         exportGroups(out);
         exportEdges(out, g);
-        
+
         // finish output operations
         out.println("]");
         out.flush();
@@ -358,7 +402,7 @@ public class YedGmlWriter<V, E, G> {
      * Exports an undirected graph into a PLAIN text file in GML format.
      *
      * @param output the writer to which the graph to be exported
-     * @param g      the undirected graph to be exported
+     * @param g the undirected graph to be exported
      */
     public void export(Writer output, UndirectedGraph<V, E> g) {
         export(output, g, false);
@@ -368,7 +412,7 @@ public class YedGmlWriter<V, E, G> {
      * Exports a directed graph into a PLAIN text file in GML format.
      *
      * @param output the writer to which the graph to be exported
-     * @param g      the directed graph to be exported
+     * @param g the directed graph to be exported
      */
     public void export(Writer output, DirectedGraph<V, E> g) {
         export(output, g, true);
