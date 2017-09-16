@@ -160,7 +160,7 @@ public class YedGmlWriter<V, E, G> {
     }
 
 
-    private static final String creator = "JGraphT GML Exporter - modified by Hayato Hess - modified by Andreas Hofstadler";
+    private static final String creator = "JGraphT GML Exporter - modified by Hayato Hess, Andreas Hofstadler";
     private static final String version = "1";
 
     public static final String delim = " ";
