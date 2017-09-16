@@ -1,8 +1,6 @@
 [![License](https://img.shields.io/badge/license-LGPL%202.1-blue.svg)](http://www.gnu.org/licenses/lgpl-2.1.html) [![Language](http://img.shields.io/badge/language-java-brightgreen.svg)](https://www.java.com/)
 # GML-Writer-for-yED
-Extends the gml export of JGraphT to better supports the import to yED.
-
-Please note that the GML-Writer-for-yED is distributed WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Extends the [Graph Modeling Language (GML)](https://en.wikipedia.org/wiki/Graph_Modelling_Language) export of JGraphT to better supports the import to yED.
 
 * Released: January 17, 2017
 * Based on: JgraphT (and yED)

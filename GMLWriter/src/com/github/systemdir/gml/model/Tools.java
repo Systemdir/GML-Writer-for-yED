@@ -61,8 +61,6 @@ class Tools {
 
     /**
      * create rgba hex from a java color
-     * @param color
-     * @return
      */
     static String getHex(Color color) {
         return String.format("#%02x%02x%02x%02x", color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());

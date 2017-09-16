@@ -78,9 +78,8 @@ public abstract class GraphicDefinition {
     protected Integer lineWidth;
     @NotNull
     protected Color lineColor;
-    
 
-    public GraphicDefinition(Builder builder) {
+    protected GraphicDefinition(Builder builder) {
         this.lineColor=builder.lineColor;
         this.lineType = builder.lineType;
         this.lineWidth = builder.lineWidth;
@@ -89,9 +88,4 @@ public abstract class GraphicDefinition {
         this.fontStyle = builder.fontStyle;
         this.labelColour = builder.labelColour;
     }
-
-
-    
-
-    
 }
