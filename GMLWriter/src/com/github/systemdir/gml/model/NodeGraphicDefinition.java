@@ -26,7 +26,15 @@ public class NodeGraphicDefinition extends GraphicDefinition {
         topLeft("tl"),
         topRight("tr"),
         bottomLeft("bl"),
-        bottomRight("br");
+        bottomRight("br"),
+        north("n"),
+        northEast("ne"),
+        east("e"),
+        southEast("se"),
+        south("s"),
+        southWest("sw"),
+        west("w"),
+        northWest("nw") ;
 
         private final String placementString;
 
