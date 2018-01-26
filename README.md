@@ -15,13 +15,14 @@ To use the gml writer, ensure that your project has following maven dependencies
         <dependency>
             <groupId>com.github.systemdir.gml</groupId>
             <artifactId>GMLWriterForYed</artifactId>
-            <version>2.0.0</version>
+            <version>2.1.0</version>
         </dependency>
+
         <dependency>
             <groupId>org.jgrapht</groupId>
             <artifactId>jgrapht-core</artifactId>
             <version>1.0.1</version>
-         </dependency>
+        </dependency>
 </dependencies>
 ```
 
