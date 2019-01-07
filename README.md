@@ -28,7 +28,3 @@ To use the gml writer, ensure that your project has following maven dependencies
 
 ### How to import to yED 
 After exporting the graph to a .gml file, import it in [yED](https://www.yworks.com/products/yed) by using the open dialog. After importing, the graph will most likely look broken as every node is placed on top of each other. To resolve this, go to the `Layout` menu in yED and select one fitting layout. Further, the `Fit Node to Label` in the `Tools` menu is useful when the labels are longer than the node's widths.
-
-## Pictures ##
-![yed2](http://hayato-hess.de/pictures/yED/YED2.jpg)
-![yed](http://hayato-hess.de/pictures/yED/YED1cpy.jpg)
