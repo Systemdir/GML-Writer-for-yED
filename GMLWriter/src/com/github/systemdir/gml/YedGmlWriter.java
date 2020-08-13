@@ -41,9 +41,7 @@ import com.github.systemdir.gml.model.UniqueIntIdFunction;
 import com.github.systemdir.gml.model.YedGmlGraphicsProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jgrapht.DirectedGraph;
 import org.jgrapht.Graph;
-import org.jgrapht.UndirectedGraph;
 
 import java.io.PrintWriter;
 import java.io.Writer;
@@ -60,11 +58,9 @@ import static com.github.systemdir.gml.YedGmlWriter.PrintLabels.*;
 
 /**
  * Exports a graph into a GML file (Graph Modelling Language) for yED.
- * <p>
  * <p>For a description of the format see <a
  * href="http://www.infosun.fmi.uni-passau.de/Graphlet/GML/">
  * http://www.infosun.fmi.uni-passau.de/Graphlet/GML/</a>.</p>
- * <p>
  *
  * @author (GML writer) Dimitrios Michail
  * @author (yED extension) Hayato Hess
@@ -95,6 +91,7 @@ public class YedGmlWriter<V, E, G> {
          *
          * @param groupMapping Maps groups to the vertices they belong to. Map must not contain null values.
          * @param groupLabelProvider Optional label function for the group. When null, toString() is used for generating group labels.
+         * @return this
          */
         public Builder<V1, E1, G1> setGroups(Map<G1, ? extends Set<V1>> groupMapping, Function<G1, String> groupLabelProvider) {
             this.groupMapping = groupMapping;
@@ -399,23 +396,12 @@ public class YedGmlWriter<V, E, G> {
     }
 
     /**
-     * Exports an undirected graph into a PLAIN text file in GML format.
+     * Exports a graph into a PLAIN text file in GML format.
      *
      * @param output the writer to which the graph to be exported
-     * @param g the undirected graph to be exported
+     * @param g the graph to be exported
      */
-    public void export(Writer output, UndirectedGraph<V, E> g) {
-        export(output, g, false);
+    public void export(Writer output, Graph<V, E> g) {
+        export(output, g, g.getType().isDirected());
     }
-
-    /**
-     * Exports a directed graph into a PLAIN text file in GML format.
-     *
-     * @param output the writer to which the graph to be exported
-     * @param g the directed graph to be exported
-     */
-    public void export(Writer output, DirectedGraph<V, E> g) {
-        export(output, g, true);
-    }
-
 }
